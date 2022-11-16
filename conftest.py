@@ -7,7 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 def driver():
     driver = webdriver.Chrome(ChromeDriverManager().install()) # если браузер установлен, то будет браться из кеша
     driver.maximize_window()
-    yield
+    yield driver
     driver.quit()
 
 
