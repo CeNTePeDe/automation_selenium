@@ -33,4 +33,4 @@ class BasePage:
 
     def go_to_element(self, element):
         # функция для перемещения к нужному элементу, c помощью JS
-        self.driver.execute_script("argument[0].scrollIntoView;", element)
+        self.driver.execute_script("arguments[0].scrollIntoView;", element)
