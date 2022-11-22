@@ -1,5 +1,7 @@
 import random
 
+from selenium.webdriver.common.by import By
+
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators
 from pages.base_page import BasePage
@@ -45,7 +47,22 @@ class CheckBoxPage(BasePage):
             if count > 0:
                 self.go_to_element(item)
                 item.click()
-                count-=1
-                print(item)
+                count -= 1
             else:
                 break
+
+    def get_checked_checkboxes(self):
+        checked_list = self.element_are_present(self.locators.CHECKED_ITEMS)
+        data = []
+        for box in checked_list:
+            title_item = box.find_element(By.XPATH, self.locators.TITLE_ITEM)
+            data.append(title_item.text)
+        return str(data).replace(' ', '').replace('doc', '').replace('.', '').lower()
+
+    def get_output_result(self):
+        result_list = self.element_are_present(self.locators.OUTPUT_RESULT)
+        data = []
+        for item in result_list:
+            data.append(item.text)
+        return str(data).replace(' ', '').lower()
+
