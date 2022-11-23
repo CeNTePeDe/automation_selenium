@@ -3,16 +3,16 @@ from selenium.webdriver.common.by import By
 
 class TextBoxPageLocators:
     FULL_NAME = (By.CSS_SELECTOR, "input[id='userName']")
-    EMAIL =(By.CSS_SELECTOR, "input[id='userEmail']")
-    CURRENT_ADDRESS =(By.CSS_SELECTOR, "textarea[id='currentAddress']")
-    PERMAMENT_ADDRESS =(By.CSS_SELECTOR, "textarea[id='permanentAddress']")
-    SUBMIT =(By.CSS_SELECTOR, "button[id='submit']")
+    EMAIL = (By.CSS_SELECTOR, "input[id='userEmail']")
+    CURRENT_ADDRESS = (By.CSS_SELECTOR, "textarea[id='currentAddress']")
+    PERMAMENT_ADDRESS = (By.CSS_SELECTOR, "textarea[id='permanentAddress']")
+    SUBMIT = (By.CSS_SELECTOR, "button[id='submit']")
 
     # created forms
-    CREATED_FULL_NAME =(By.XPATH, "//p[@id='name']")
-    CREATED_EMAIL =(By.XPATH, "//p[@id='email'] ")
-    CREATED_CURRENT_ADDRESS =(By.XPATH, "//p[@id='currentAddress']")
-    CREATED_PERMANENT_ADDRESS =(By.XPATH, "//p[@id='permanentAddress']")
+    CREATED_FULL_NAME = (By.XPATH, "//p[@id='name']")
+    CREATED_EMAIL = (By.XPATH, "//p[@id='email'] ")
+    CREATED_CURRENT_ADDRESS = (By.XPATH, "//p[@id='currentAddress']")
+    CREATED_PERMANENT_ADDRESS = (By.XPATH, "//p[@id='permanentAddress']")
 
 
 class CheckBoxPageLocators:
@@ -22,8 +22,24 @@ class CheckBoxPageLocators:
     TITLE_ITEM = (".//ancestor::span[@class='rct-text']")
     OUTPUT_RESULT = (By.CSS_SELECTOR, "span[class='text-success']")
 
+
 class RadioButtonPageLocators:
-    YES_RADIOBUTTON =(By.CSS_SELECTOR, "label[class^='custom-control'][for='yesRadio']")
+    YES_RADIOBUTTON = (By.CSS_SELECTOR, "label[class^='custom-control'][for='yesRadio']")
     IMPRESSIVE_RADIOBUTTON = (By.CSS_SELECTOR, "label[class^='custom-control'][for='impressiveRadio']")
     NO_RADIOBUTTON = (By.CSS_SELECTOR, "label[class^='custom-control'][for='noRadio']")
     OUTPUT_RESULT = (By.CSS_SELECTOR, "p span[class='text-success']")
+
+
+class WebTablesPageLocators:
+    # локаторы, для добовления человека
+    ADD_BUTTON =(By.CSS_SELECTOR, 'button[id ="addNewRecordButton"]')
+    FIRSTNAME_INPUT =(By.CSS_SELECTOR, 'input[id ="firstName"]')
+    LASTNAME_INPUT =(By.CSS_SELECTOR, 'input[id ="lastName"]')
+    EMAIL_INPUT=(By.CSS_SELECTOR, 'input[id ="userEmail"]')
+    AGE_INPUT =(By.CSS_SELECTOR, 'input[id ="age"]')
+    SALARY_INPUT =(By.CSS_SELECTOR, 'input[id ="salary"]')
+    DEPARTMENT_INPUT =(By.CSS_SELECTOR, 'input[id ="department"]')
+    SUBMIT =(By.CSS_SELECTOR, 'button[id="submit"]')
+
+    #tables
+    FULL_PEOPLE_LIST = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
