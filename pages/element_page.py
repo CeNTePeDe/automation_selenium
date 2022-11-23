@@ -115,5 +115,14 @@ class WebTablePage(BasePage):
             data.append(item.text.splitlines())
         return data
 
+    def search_some_person(self, key_word):
+        self.element_is_visible(self.locators.SEARCH_INPUT).send_keys(key_word)
+
+    def check_seach_person(self):
+        delete_button = self.element_is_present(self.locators.DELETE_BUTTON)
+        row = delete_button.find_element(By.XPATH, self.locators.ROW_PARENT)
+        return row.text.splitlines()
+
+
 
 
