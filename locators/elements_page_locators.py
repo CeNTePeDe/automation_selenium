@@ -32,26 +32,35 @@ class RadioButtonPageLocators:
 
 class WebTablesPageLocators:
     # локаторы, для добовления человека
-    ADD_BUTTON =(By.CSS_SELECTOR, 'button[id ="addNewRecordButton"]')
-    FIRSTNAME_INPUT =(By.CSS_SELECTOR, 'input[id ="firstName"]')
-    LASTNAME_INPUT =(By.CSS_SELECTOR, 'input[id ="lastName"]')
-    EMAIL_INPUT=(By.CSS_SELECTOR, 'input[id ="userEmail"]')
-    AGE_INPUT =(By.CSS_SELECTOR, 'input[id ="age"]')
-    SALARY_INPUT =(By.CSS_SELECTOR, 'input[id ="salary"]')
-    DEPARTMENT_INPUT =(By.CSS_SELECTOR, 'input[id ="department"]')
-    SUBMIT =(By.CSS_SELECTOR, 'button[id="submit"]')
+    ADD_BUTTON = (By.CSS_SELECTOR, 'button[id ="addNewRecordButton"]')
+    FIRSTNAME_INPUT = (By.CSS_SELECTOR, 'input[id ="firstName"]')
+    LASTNAME_INPUT = (By.CSS_SELECTOR, 'input[id ="lastName"]')
+    EMAIL_INPUT = (By.CSS_SELECTOR, 'input[id ="userEmail"]')
+    AGE_INPUT = (By.CSS_SELECTOR, 'input[id ="age"]')
+    SALARY_INPUT = (By.CSS_SELECTOR, 'input[id ="salary"]')
+    DEPARTMENT_INPUT = (By.CSS_SELECTOR, 'input[id ="department"]')
+    SUBMIT = (By.CSS_SELECTOR, 'button[id="submit"]')
 
-    #tables
+    # tables
     FULL_PEOPLE_LIST = (By.CSS_SELECTOR, "div[class='rt-tr-group']")
-    #seach
+    # seach
     SEARCH_INPUT = (By.CSS_SELECTOR, "input[id='searchBox']")
     DELETE_BUTTON = (By.CSS_SELECTOR, "span[title='Delete']")
     ROW_PARENT = ".//ancestor::div[@class='rt-tr-group']"
-    #update
+    # update
     UPDATE_BUTTON = (By.CSS_SELECTOR, 'span[title="Edit"]')
-    #delete
+    # delete
     DELETE_TEXT = (By.CSS_SELECTOR, 'div[class="rt-noData"]')
 
     COUNT = (By.CSS_SELECTOR, 'select[aria-label="rows per page"]')
 
+
+class ButtonsPageLocators:
+    DOUBLE_BUTTON_CLICK = (By.CSS_SELECTOR, 'button[id="doubleClickBtn"]')
+    RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, 'button[id="rightClickBtn"]')
+    CLICK_ME_BUTTON = (By.XPATH, '//div[3]/button')
+    #result
+    SUCCESS_DOUBLE = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
+    SUCCESS_RIGHT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
+    SUCCESS_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
 
