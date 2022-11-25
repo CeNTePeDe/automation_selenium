@@ -1,10 +1,11 @@
 import random
 
+import requests
 from selenium.webdriver.common.by import By
 
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators, ButtonsPageLocators
+    WebTablesPageLocators, ButtonsPageLocators, LinkPageLocators
 from pages.base_page import BasePage
 
 
@@ -155,7 +156,6 @@ class WebTablePage(BasePage):
 
 
 class ButtonsPage(BasePage):
-
     locators = ButtonsPageLocators()
 
     def click_on_different_button(self, type_click):
@@ -173,3 +173,11 @@ class ButtonsPage(BasePage):
 
     def check_clicked_on_the_button(self, element):
         return self.element_is_present(element).text
+
+
+class LinksPage(BasePage):
+    locators = LinkPageLocators()
+
+    def check_new_simple_link(self):
+        simple_link = self.element_is_visible((self.locators.HOME_LINK))
+        request = requests.get()

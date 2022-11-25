@@ -1,6 +1,6 @@
 import random
 import time
-from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
+from pages.element_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage
 
 
 class TestElements:
@@ -97,6 +97,18 @@ class TestElements:
             print(double)
             print(right)
             print(click)
-            assert double== "You have done a double click"
-            assert right == "You have done a right click"
-            assert click == "You have done a dynamic click"
+            assert double== "You have done a double click", "The double click button was not press"
+            assert right == "You have done a right click", "The right click button was not press"
+            assert click == "You have done a dynamic click", "The dynamic click button was not press"
+
+
+
+    class TestLinksPage:
+
+        def test_check_link(self, driver):
+            link_page = LinksPage(driver, 'https://demoqa.com/links')
+            link_page.open()
+
+        def test_broken_link(self, driver):
+            link_page = LinksPage(driver, 'https://demoqa.com/links')
+            link_page.open()

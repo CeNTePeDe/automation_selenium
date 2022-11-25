@@ -64,3 +64,17 @@ class ButtonsPageLocators:
     SUCCESS_RIGHT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
     SUCCESS_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
 
+class LinkPageLocators:
+    HOME_LINK = (By.XPATH, "//a[@id='simpleLink']")
+    HOME_LINK_ZAYQD =(By.XPATH, "//a[@id='dynamicLink']")
+
+    CREATED =(By.XPATH, "//a[@id='created']")
+    NO_CONTENT =(By.XPATH, "//a[@id='no-content']")
+    MOVED =(By.XPATH, "//a[@id='moved']")
+    BAD_REQUEST =(By.XPATH, "//a[@id='bad-request']")
+    UNAUTHORIZED =(By.XPATH, "//a[@id='unauthorized']")
+    FORBITTEN =(By.XPATH, "//a[@id='forbidden']")
+    NOT_FOUND =(By.XPATH, "invalid-url")
+
+
+
