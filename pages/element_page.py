@@ -1,13 +1,16 @@
 import base64
 import os
 import random
+import time
 
 import requests
+from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
 
 from generator.generator import generated_person, generated_file
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablesPageLocators, ButtonsPageLocators, LinkPageLocators, UploadDownloadPageLocators
+    WebTablesPageLocators, ButtonsPageLocators, LinkPageLocators, UploadDownloadPageLocators, \
+    DinamicPropertiesPageLocators
 from pages.base_page import BasePage
 
 
@@ -200,6 +203,7 @@ class LinksPage(BasePage):
         else:
             return request.status_code
 
+
 class UploadDownloadPage(BasePage):
     locators = UploadDownloadPageLocators()
 
@@ -213,7 +217,7 @@ class UploadDownloadPage(BasePage):
     def download_file(self):
         link = self.element_is_present(self.locators.DOWNLOAD_FILE).get_attribute('href')
         link_b = base64.b64decode(link)
-        path_name = rf'C:\Users\Anton\PycharmProjects\automation_selenium\filetest{random.randint(0,999)}.jpg'
+        path_name = rf'C:\Users\Anton\PycharmProjects\automation_selenium\filetest{random.randint(0, 999)}.jpg'
         with open(path_name, 'wb+') as f:
             offset = link_b.find(b'\xff\xd8')
             f.write(link_b[offset:])
@@ -223,4 +227,30 @@ class UploadDownloadPage(BasePage):
         return check_file
 
 
+class DinamicPropertiesPage(BasePage):
+    locators = DinamicPropertiesPageLocators()
+
+    def check_enable_button(self):
+
+        try:
+            enable_button = self.element_is_clickable(self.locators.ENABLE_BUTTON).click()
+        except TimeoutException:
+            return False
+        return True
+
+
+    def check_changed_of_color(self):
+        color_button = self.element_is_present(self.locators.COLOR_CHANGE_BUTTON)
+        color_before = color_button.value_of_css_property('color')
+        time.sleep(5)
+        color_after = color_button.value_of_css_property('color')
+
+        return color_before, color_after
+
+    def check_appear_button(self):
+        try:
+            self.element_is_visible(self.locators.VISIBLE_AFTER_BUTTON).click()
+        except TimeoutException:
+            return False
+        return True
 
