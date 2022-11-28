@@ -59,22 +59,20 @@ class ButtonsPageLocators:
     DOUBLE_BUTTON_CLICK = (By.CSS_SELECTOR, 'button[id="doubleClickBtn"]')
     RIGHT_CLICK_BUTTON = (By.CSS_SELECTOR, 'button[id="rightClickBtn"]')
     CLICK_ME_BUTTON = (By.XPATH, '//div[3]/button')
-    #result
+    # result
     SUCCESS_DOUBLE = (By.CSS_SELECTOR, 'p[id="doubleClickMessage"]')
     SUCCESS_RIGHT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
     SUCCESS_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
 
+
 class LinkPageLocators:
     HOME_LINK = (By.XPATH, "//a[@id='simpleLink']")
-    HOME_LINK_ZAYQD =(By.XPATH, "//a[@id='dynamicLink']")
+    HOME_LINK_ZAYQD = (By.XPATH, "//a[@id='dynamicLink']")
 
-    CREATED =(By.XPATH, "//a[@id='created']")
-    NO_CONTENT =(By.XPATH, "//a[@id='no-content']")
-    MOVED =(By.XPATH, "//a[@id='moved']")
-    BAD_REQUEST =(By.XPATH, "//a[@id='bad-request']")
-    UNAUTHORIZED =(By.XPATH, "//a[@id='unauthorized']")
-    FORBITTEN =(By.XPATH, "//a[@id='forbidden']")
-    NOT_FOUND =(By.XPATH, "invalid-url")
-
-
-
+    CREATED = (By.XPATH, "//a[@id='created']")
+    NO_CONTENT = (By.XPATH, "//a[@id='no-content']")
+    MOVED = (By.XPATH, "//a[@id='moved']")
+    BAD_REQUEST = (By.XPATH, "//a[@id='bad-request']")
+    UNAUTHORIZED = (By.XPATH, "//a[@id='unauthorized']")
+    FORBITTEN = (By.XPATH, "//a[@id='forbidden']")
+    NOT_FOUND = (By.XPATH, "invalid-url")
