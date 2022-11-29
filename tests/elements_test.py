@@ -133,8 +133,6 @@ class TestElements:
 
     class TestDynamicPropities:
 
-
-
         def test_dynamic_properties(self, driver):
             dynamic_properties_page = DinamicPropertiesPage(driver, 'https://demoqa.com/dynamic-properties')
             dynamic_properties_page.open()
