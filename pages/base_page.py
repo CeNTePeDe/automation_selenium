@@ -14,6 +14,7 @@ class BasePage:
         self.driver.get(self.url)
 
     def element_is_visible(self, locator, timeout=10):
+        self.go_to_element(self.element_is_present(locator))
         return wait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
     def elements_are_visible(self, locator, timeout=10):
@@ -33,8 +34,7 @@ class BasePage:
         return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
 
     def go_to_element(self, element):
-        # функция для перемещения к нужному элементу, c помощью JS
-        self.driver.execute_script("arguments[0].scrollIntoView;", element)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     def action_double_click(self, element):
         action = ActionChains(self.driver)
