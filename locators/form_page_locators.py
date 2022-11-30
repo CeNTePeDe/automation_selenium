@@ -20,5 +20,7 @@ class FormPageLocators:
     CITY_INPUT = (By.CSS_SELECTOR, 'input[id="react-select-4-input"]')
     SUBMIT = (By.XPATH, '//button[@id="submit"]')
 
+    #AD = (By.CSS_SELECTOR, "div[class='abgcp']")
+
     # result
-    # RESULT_TABLE=
+    RESULT_TABLE =(By.XPATH, '//div[@class="table-responsive"]//td[2]')
