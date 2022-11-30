@@ -27,12 +27,19 @@ class FormPage(BasePage):
         os.remove(path)
         self.element_is_visible(self.locators.CURRENT_ADDRESS).send_keys(person.CURRENT_ADDRESS)
 
-        self.go_to_element(self.element_is_present(self.locators.SELECT_STATE))
-        self.element_is_visible(self.locators.SELECT_STATE).send_keys(Keys.RETURN)
-
+        self.element_is_visible(self.locators.SELECT_STATE).click()
         self.element_is_visible(self.locators.STATE_INPUT).send_keys(Keys.RETURN)
+
         self.element_is_visible(self.locators.SELECT_SITY).click()
         self.element_is_visible(self.locators.CITY_INPUT).send_keys(Keys.RETURN)
 
         self.element_is_visible(self.locators.SUBMIT).click()
         return person
+
+    def form_result(self):
+        result_list = self.element_are_present(self.locators.RESULT_TABLE)
+        data = []
+        for item in result_list:
+            self.go_to_element(item)
+            data.append(item.text)
+        return data
