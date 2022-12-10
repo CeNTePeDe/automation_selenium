@@ -1,10 +1,9 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, ProgressBarPage, SliderPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, ProgressBarPage, SliderPage, TabsPage
 
 
 class TestWidgets:
-
     class TestAccordianPage:
 
         def test_accordian(self, driver):
@@ -47,7 +46,6 @@ class TestWidgets:
             date_before, date_after = date_picker_page.select_date()
             assert date_before != date_after, 'The date and time has not been changed'
 
-
         def test_change_date_and_time(self, driver):
             date_picker_page = DatePickerPage(driver, 'https://demoqa.com/date-picker')
             date_picker_page.open()
@@ -63,7 +61,6 @@ class TestWidgets:
             values_before, values_after = slider_page.change_slider_value()
             assert values_before != values_after, 'Slider has not been changed'
 
-
     class TestProgressBar:
         def test_progress_bar(self, driver):
             progress_bar = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
@@ -72,3 +69,12 @@ class TestWidgets:
             print(value_before)
             print(value_after)
             assert value_before != value_after, 'Progress bar has not been changed'
+
+    class TestTabs:
+        def test_tabs(self, driver):
+            tabs = TabsPage(driver, 'https://demoqa.com/tabs')
+            tabs.open()
+            what_tab_text, origin_tab_text, use_tab_text = tabs.change_tabs()
+            assert what_tab_text == 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+            assert origin_tab_text == 'Contrary to popular belief, Lorem Ipsum is not simply random text.'
+            assert use_tab_text == 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
