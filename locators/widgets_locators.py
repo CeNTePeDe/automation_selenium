@@ -40,9 +40,9 @@ class SliderPageLocators:
     SLIDER_VALUE = (By.CSS_SELECTOR, 'input[id="sliderValue"]')
 
 class ProgressBarPageLocators:
-    PROGRESS_BAR = (By.CSS_SELECTOR, 'div[id="progressBar"]')
+
     BUTTON_START =(By.CSS_SELECTOR, 'button[id="startStopButton"]')
-    PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, '')
+    PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
 
 
 
