@@ -6,7 +6,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.widgets_locators import AccordianPageLocators, AutoCompletePageocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators
 from pages.base_page import BasePage
 
 
@@ -129,6 +129,18 @@ class ProgressBarPage(BasePage):
         progress_bar.click()
         value_after = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).get_attribute('aria-valuenow')
         return value_before, value_after
+
+class TabsPage(BasePage):
+    locators = TabsPageLocators()
+    def change_tabs(self):
+        what_tab_text = self.element_is_visible(self.locators.WHAT_TAB_TEXT).text[:74]
+        origin_tab = self.element_is_clickable(self.locators.ORIGIN_TAB).click()
+        origin_tab_taxt = self.element_is_visible(self.locators.ORIGIN_TAB_TEXT).text[:66]
+        use_tab = self.element_is_clickable(self.locators.USE_TAB).click()
+        use_tab_text = self.element_is_visible(self.locators.USE_TAB_TEXT).text[:124]
+        return what_tab_text, origin_tab_taxt, use_tab_text
+
+
 
 
 
