@@ -1,4 +1,5 @@
 import random
+import time
 
 from selenium.webdriver import Keys
 from selenium.webdriver.support.select import Select
@@ -120,6 +121,14 @@ class SliderPage(BasePage):
 
 class ProgressBarPage(BasePage):
     locators = ProgressBarPageLocators()
+    def change_progress_bar_value(self):
+        value_before = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).get_attribute('aria-valuenow')
+        progress_bar = self.element_is_clickable(self.locators.BUTTON_START)
+        progress_bar.click()
+        time.sleep(random.randint(2,5))
+        progress_bar.click()
+        value_after = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).get_attribute('aria-valuenow')
+        return value_before, value_after
 
 
 
