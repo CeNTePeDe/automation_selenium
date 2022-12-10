@@ -24,7 +24,7 @@ class BasePage:
         # для того, чтобы найти элемент
         return wait(self.driver, timeout).until(EC.presence_of_element_located(locator))
 
-    def elements_are_present(self, locator, timeout=10):
+    def elements_are_presents(self, locator, timeout=10):
         return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
     def element_is_not_visible(self, locator, timeout=10):
