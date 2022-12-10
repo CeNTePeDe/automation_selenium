@@ -35,14 +35,22 @@ class DatePickerPageLocators:
     DATE_AND_TIME_MONTH_LIST = (By.CSS_SELECTOR, 'div[class="react-datepicker__month-option"]')
     DATE_AND_TIME_YEAR_LIST = (By.CSS_SELECTOR, 'div[class="react-datepicker__year-option"]')
 
+
 class SliderPageLocators:
     SLIDER_VALUE_RANGE = (By.CSS_SELECTOR, 'input[class="range-slider range-slider--primary"]')
     SLIDER_VALUE = (By.CSS_SELECTOR, 'input[id="sliderValue"]')
 
-class ProgressBarPageLocators:
 
-    BUTTON_START =(By.CSS_SELECTOR, 'button[id="startStopButton"]')
+class ProgressBarPageLocators:
+    BUTTON_START = (By.CSS_SELECTOR, 'button[id="startStopButton"]')
     PROGRESS_BAR_VALUE = (By.CSS_SELECTOR, 'div[class="progress-bar bg-info"]')
 
 
+class TabsPageLocators:
+    WHAT_TAB = (By.CSS_SELECTOR, 'a[id="demo-tab-what"]')
+    ORIGIN_TAB = (By.CSS_SELECTOR, 'a[id="demo-tab-origin"]')
+    USE_TAB = (By.CSS_SELECTOR, 'a[id="demo-tab-use"]')
 
+    WHAT_TAB_TEXT = (By.XPATH, '//div[@id="demo-tabpane-what"]')
+    ORIGIN_TAB_TEXT = (By.XPATH, '//div[@id="demo-tabpane-origin"] ')
+    USE_TAB_TEXT = (By.XPATH, '//div[@id="demo-tabpane-use"] ')
