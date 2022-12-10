@@ -68,3 +68,7 @@ class TestWidgets:
         def test_progress_bar(self, driver):
             progress_bar = ProgressBarPage(driver, 'https://demoqa.com/progress-bar')
             progress_bar.open()
+            value_before, value_after = progress_bar.change_progress_bar_value()
+            print(value_before)
+            print(value_after)
+            assert value_before != value_after, 'Progress bar has not been changed'
