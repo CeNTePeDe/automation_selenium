@@ -72,3 +72,6 @@ class ToolTipPageLocatorts:
     TOOL_TIPS_INNER = (By.CSS_SELECTOR, 'div[class="tooltip-inner"]')
 
 
+class MenuItemPageLocators:
+    MENU_ITEM_1 = (By.CSS_SELECTOR, 'ul[id="nav"] li a')
+
