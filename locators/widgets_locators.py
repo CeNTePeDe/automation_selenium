@@ -54,3 +54,21 @@ class TabsPageLocators:
     WHAT_TAB_TEXT = (By.XPATH, '//div[@id="demo-tabpane-what"]')
     ORIGIN_TAB_TEXT = (By.XPATH, '//div[@id="demo-tabpane-origin"] ')
     USE_TAB_TEXT = (By.XPATH, '//div[@id="demo-tabpane-use"] ')
+
+class ToolTipPageLocatorts:
+
+    BUTTON = (By.CSS_SELECTOR, 'button[id="toolTipButton"]')
+    BUTTON_TEXT = (By.CSS_SELECTOR, 'button[aria-describedby="buttonToolTip"]')
+
+    INPUT_FIELD = (By.CSS_SELECTOR, 'input[id="toolTipTextField"]')
+    INPUT_FIELD_TEXT = (By.CSS_SELECTOR, 'button[aria-describedby="textFieldToolTip"]')
+
+    LINK_CONTRARY = (By.XPATH, ' //*[.="Contrary"]')
+    LINK_CONTRARY_TEXT = (By.CSS_SELECTOR,'button[aria-describedby="contraryTexToolTip"]' )
+
+    LINK_SECTION = (By.XPATH, ' //*[.="1.10.32"] ')
+    LINK_SECTION_TEXT = (By.CSS_SELECTOR,'button[aria-describedby="sectionToolTip"]' )
+
+    TOOL_TIPS_INNER = (By.CSS_SELECTOR, 'div[class="tooltip-inner"]')
+
+
