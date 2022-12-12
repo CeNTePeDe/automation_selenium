@@ -1,6 +1,7 @@
 import time
 
-from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, ProgressBarPage, SliderPage, TabsPage
+from pages.widgets_page import AccordianPage, AutoCompletePage, DatePickerPage, ProgressBarPage, SliderPage, TabsPage, \
+    ToolTipPage
 
 
 class TestWidgets:
@@ -78,3 +79,13 @@ class TestWidgets:
             assert what_tab_text == 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
             assert origin_tab_text == 'Contrary to popular belief, Lorem Ipsum is not simply random text.'
             assert use_tab_text == 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+
+    class TestToolTip:
+        def test_tool_tip(self, driver):
+            tool_tab = ToolTipPage(driver, 'https://demoqa.com/tool-tips')
+            tool_tab.open()
+            tool_tip_text_button, tool_tip_text_field, tool_tip_text_contrary, tool_tip_text_section = tool_tab.check_tools()
+            assert tool_tip_text_button == "You hovered over the Button", 'hover missing oe incorrect content'
+            assert tool_tip_text_field == "You hovered over the text field", 'hover missing oe incorrect content'
+            assert tool_tip_text_contrary == "You hovered over the Contrary", 'hover missing oe incorrect content'
+            assert tool_tip_text_section == "You hovered over the 1.10.32", 'hover missing oe incorrect content'
