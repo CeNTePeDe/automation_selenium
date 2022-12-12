@@ -6,7 +6,7 @@ from selenium.webdriver.support.select import Select
 
 from generator.generator import generated_color, generated_date
 from locators.widgets_locators import AccordianPageLocators, AutoCompletePageocators, DatePickerPageLocators, \
-    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipPageLocatorts
+    SliderPageLocators, ProgressBarPageLocators, TabsPageLocators, ToolTipPageLocatorts, MenuItemPageLocators
 from pages.base_page import BasePage
 
 
@@ -31,7 +31,7 @@ class AutoCompletePage(BasePage):
     locators = AutoCompletePageocators()
 
     def fill_input_multi(self):
-        colors = random.sample(next(generated_color()).color_name, k=random.randint(2,4))
+        colors = random.sample(next(generated_color()).color_name, k=random.randint(2, 4))
         for color in colors:
             input_multi = self.element_is_visible(self.locators.MULTI_COLOR_NAMES)
             input_multi.send_keys(color)
@@ -48,7 +48,7 @@ class AutoCompletePage(BasePage):
         return count_value_before, count_value_after
 
     def check_color_in_multi(self):
-        color_list  = self.elements_are_presents(self.locators.MULTI_VALUE)
+        color_list = self.elements_are_presents(self.locators.MULTI_VALUE)
         colors = []
         for color in color_list:
             colors.append(color.text)
@@ -66,10 +66,9 @@ class AutoCompletePage(BasePage):
         return color.text
 
 
-
 class DatePickerPage(BasePage):
-
     locators = DatePickerPageLocators()
+
     def select_date(self):
         date = next(generated_date())
         input_date = self.element_is_visible(self.locators.DATE_INPUT)
@@ -95,7 +94,6 @@ class DatePickerPage(BasePage):
         value_date_after = input_date.get_attribute("value")
         return value_date_before, value_date_after
 
-
     def set_date_by_text(self, element, value):
         select = Select(self.element_is_present(element))
         select.select_by_visible_text(value)
@@ -107,13 +105,14 @@ class DatePickerPage(BasePage):
                 item.click()
                 break
 
-class SliderPage(BasePage):
 
+class SliderPage(BasePage):
     locators = SliderPageLocators()
+
     def change_slider_value(self):
-        value_before =self.element_is_visible(self.locators.SLIDER_VALUE).get_attribute('value')
+        value_before = self.element_is_visible(self.locators.SLIDER_VALUE).get_attribute('value')
         slider_input = self.element_is_visible(self.locators.SLIDER_VALUE_RANGE)
-        self.action_drag_and_drop_by_offset(slider_input, random.randint(0,100), 0)
+        self.action_drag_and_drop_by_offset(slider_input, random.randint(0, 100), 0)
 
         value_after = self.element_is_visible(self.locators.SLIDER_VALUE).get_attribute('value')
         return value_before, value_after
@@ -121,17 +120,20 @@ class SliderPage(BasePage):
 
 class ProgressBarPage(BasePage):
     locators = ProgressBarPageLocators()
+
     def change_progress_bar_value(self):
         value_before = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).get_attribute('aria-valuenow')
         progress_bar = self.element_is_clickable(self.locators.BUTTON_START)
         progress_bar.click()
-        time.sleep(random.randint(2,5))
+        time.sleep(random.randint(2, 5))
         progress_bar.click()
         value_after = self.element_is_present(self.locators.PROGRESS_BAR_VALUE).get_attribute('aria-valuenow')
         return value_before, value_after
 
+
 class TabsPage(BasePage):
     locators = TabsPageLocators()
+
     def change_tabs(self):
         what_tab_text = self.element_is_visible(self.locators.WHAT_TAB_TEXT).text[:74]
         origin_tab = self.element_is_clickable(self.locators.ORIGIN_TAB).click()
@@ -139,6 +141,7 @@ class TabsPage(BasePage):
         use_tab = self.element_is_clickable(self.locators.USE_TAB).click()
         use_tab_text = self.element_is_visible(self.locators.USE_TAB_TEXT).text[:124]
         return what_tab_text, origin_tab_taxt, use_tab_text
+
 
 class ToolTipPage(BasePage):
     locators = ToolTipPageLocatorts()
@@ -152,13 +155,23 @@ class ToolTipPage(BasePage):
         return text
 
     def check_tools(self):
-        tool_tip_text_button =self.get_text_from_tool_tips(self.locators.BUTTON, self.locators.BUTTON_TEXT)
-        tool_tip_text_field =self.get_text_from_tool_tips(self.locators.INPUT_FIELD, self.locators.INPUT_FIELD_TEXT)
-        tool_tip_text_contrary = self.get_text_from_tool_tips(self.locators.LINK_CONTRARY, self.locators.LINK_CONTRARY_TEXT)
-        tool_tip_text_section =self.get_text_from_tool_tips(self.locators.LINK_SECTION, self.locators.LINK_SECTION_TEXT)
+        tool_tip_text_button = self.get_text_from_tool_tips(self.locators.BUTTON, self.locators.BUTTON_TEXT)
+        tool_tip_text_field = self.get_text_from_tool_tips(self.locators.INPUT_FIELD, self.locators.INPUT_FIELD_TEXT)
+        tool_tip_text_contrary = self.get_text_from_tool_tips(self.locators.LINK_CONTRARY,
+                                                              self.locators.LINK_CONTRARY_TEXT)
+        tool_tip_text_section = self.get_text_from_tool_tips(self.locators.LINK_SECTION,
+                                                             self.locators.LINK_SECTION_TEXT)
 
         return tool_tip_text_button, tool_tip_text_field, tool_tip_text_contrary, tool_tip_text_section
 
 
+class MenuItemPage(BasePage):
+    locators = MenuItemPageLocators()
 
-
+    def check_menu(self):
+        menu_item_list = self.elements_are_presents(self.locators.MENU_ITEM_1)
+        data = []
+        for item in menu_item_list:
+            self.action_move_to_element(item)
+            data.append(item.text)
+        return data
