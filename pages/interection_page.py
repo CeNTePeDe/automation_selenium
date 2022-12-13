@@ -1,6 +1,6 @@
 import random
 
-from locators.interection_page_locators import SortablePageLocators
+from locators.interection_page_locators import SortablePageLocators, SelectablePageLocators
 from pages.base_page import BasePage
 
 
@@ -21,13 +21,27 @@ class SortablePage(BasePage):
         order_after = self.get_sortable(locator_item)
         return order_before, order_after
 
-    def change_order_item(self, k = random.choice([1,2])):
-
+    def change_order_item(self, k=random.choice([1, 2])):
         order_before_list, order_after_list = self.change_order(self.locators.LIST_TABS, self.locators.ITEM_LIST_TABS)
         order_before_grid, order_after_grid = self.change_order(self.locators.GRID_TABS, self.locators.GRID_TABS_LIST)
         return order_before_list, order_after_list, order_before_grid, order_after_grid
 
 
+class SelectablePage(BasePage):
+    locators = SelectablePageLocators()
 
+    def click_selectable_item(self, elements):
+        item_list = self.elements_are_visible(elements)
+        random.sample(item_list, k=1)[0].click()
 
+    def select_list_item(self):
+        self.element_is_visible(self.locators.LIST_TAB).click()
+        self.click_selectable_item(self.locators.LIST_TAB_ITEM)
+        active_element = self.element_is_visible(self.locators.LIST_TAB_ITEM_ACTIVE)
+        return active_element.text
 
+    def select_grid_item(self):
+        self.element_is_visible(self.locators.GRID_TAB).click()
+        self.click_selectable_item(self.locators.GRID_TAB_ITEM)
+        active_element = self.element_is_visible(self.locators.GRID_TAB_ITEM_ACTIVE)
+        return active_element.text
