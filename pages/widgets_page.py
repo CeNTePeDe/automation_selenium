@@ -149,7 +149,7 @@ class ToolTipPage(BasePage):
     def get_text_from_tool_tips(self, hover_elem, wait_elem):
         element = self.element_is_present(hover_elem)
         self.action_move_to_element(element)
-        #self.element_is_visible(wait_elem)
+        self.element_is_visible(wait_elem)
         tool_tip_text = self.element_is_visible(self.locators.TOOL_TIPS_INNER)
         text = tool_tip_text.text
         return text
