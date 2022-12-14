@@ -1,6 +1,6 @@
 import random
 
-from pages.interection_page import SortablePage, SelectablePage
+from pages.interection_page import SortablePage, SelectablePage, ResizeblePage
 
 
 class TestInteraction:
@@ -20,3 +20,13 @@ class TestInteraction:
             item_grid = selectable_page.select_grid_item()
             assert len(item_list) > 0, 'no elements were selected'
             assert len(item_grid) > 0, 'no elements were selected'
+
+    class TestResizeblePage:
+        def test_resizeble_page(self, driver):
+            resizeble_page = ResizeblePage(driver, 'https://demoqa.com/resizable')
+            resizeble_page.open()
+            max_box, min_box = resizeble_page.change_size_resible_box()
+            max_resize, min_resize = resizeble_page.change_size_resible()
+            assert ('500px', '300px') == max_box, "maximum size not equal to '500px', '300px'"
+            assert ('150px', '150px') == min_box, "maximum size not equal to '150px', '150px'"
+            assert min_resize != max_resize, "resizeble has not been changed"
