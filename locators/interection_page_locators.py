@@ -16,3 +16,11 @@ class SelectablePageLocators:
     GRID_TAB_ITEM = (By.CSS_SELECTOR, 'li[class = "list-group-item list-group-item-action"]')
     GRID_TAB_ITEM_ACTIVE = (By.CSS_SELECTOR, 'li[class = "list-group-item active list-group-item-action"]')
 
+class ResizeblePageLocators:
+    RESIZEBLE_BOX = (By.CSS_SELECTOR, 'div[id="resizableBoxWithRestriction"]')
+    RESIZEBLE_BOX_HANDLE = (By.CSS_SELECTOR,
+        'div[id= "resizableBoxWithRestriction"] span[class="react-resizable-handle react-resizable-handle-se"]')
+    RESIZEBLE_HANDLE = (By.CSS_SELECTOR,
+         'div[id= "resizable"] [class="react-resizable-handle react-resizable-handle-se"]')
+    HANDLE = (By.CSS_SELECTOR, 'div[id= "resizable"] ')
+
