@@ -1,6 +1,8 @@
 import random
+import time
 
-from locators.interection_page_locators import SortablePageLocators, SelectablePageLocators, ResizeblePageLocators
+from locators.interection_page_locators import SortablePageLocators, SelectablePageLocators, ResizeblePageLocators, \
+    DropablePageLocators
 from pages.base_page import BasePage
 
 
@@ -46,12 +48,13 @@ class SelectablePage(BasePage):
         active_element = self.element_is_visible(self.locators.GRID_TAB_ITEM_ACTIVE)
         return active_element.text
 
+
 class ResizeblePage(BasePage):
     locators = ResizeblePageLocators()
 
     def get_px_from_width_height(self, value_of_size):
-        width = value_of_size.split(';')[0].split(':')[1].replace(' ','')
-        heigh = value_of_size.split(';')[1].split(':')[1].replace(' ','')
+        width = value_of_size.split(';')[0].split(':')[1].replace(' ', '')
+        heigh = value_of_size.split(';')[1].split(':')[1].replace(' ', '')
         return width, heigh
 
     def get_max_min_size(self, element):
@@ -60,19 +63,76 @@ class ResizeblePage(BasePage):
         return size_value
 
     def change_size_resible_box(self):
-        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZEBLE_BOX_HANDLE), 400,200)
+        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZEBLE_BOX_HANDLE), 400, 200)
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZEBLE_BOX))
 
-        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZEBLE_BOX_HANDLE),-400,-200)
+        self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZEBLE_BOX_HANDLE), -400, -200)
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.RESIZEBLE_BOX))
         return max_size, min_size
 
     def change_size_resible(self):
         self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZEBLE_HANDLE),
-                                            random.randint(1,300), random.randint(1,300))
+                                            random.randint(1, 300), random.randint(1, 300))
         max_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.HANDLE))
 
         self.action_drag_and_drop_by_offset(self.element_is_visible(self.locators.RESIZEBLE_HANDLE),
-                                            random.randint(-200,-1), random.randint(-200,-1))
+                                            random.randint(-200, -1), random.randint(-200, -1))
         min_size = self.get_px_from_width_height(self.get_max_min_size(self.locators.HANDLE))
         return max_size, min_size
+
+
+class DropablePage(BasePage):
+    locators = DropablePageLocators()
+
+    def drop_simple(self):
+        self.element_is_visible(self.locators.SIMPLE_TABS)
+        drag_div = self.element_is_visible(self.locators.DRAG_ME)
+        drop_div = self.element_is_visible(self.locators.DROPED)
+        self.action_drag_and_drop_to_element(drag_div, drop_div)
+        return drop_div.text
+
+    def accept_droppable(self):
+        self.element_is_clickable(self.locators.ACCEPT_TABS).click()
+        acceptable_div = self.element_is_visible(self.locators.ACCEPTABLE)
+        not_acceptable_div =self.element_is_visible(self.locators.NOT_ACCEPTABLE)
+        drop_div = self.element_is_visible(self.locators.DROP_HER)
+        self.action_drag_and_drop_to_element(not_acceptable_div, drop_div)
+        drop_text_not_accept = drop_div.text
+        self.action_drag_and_drop_to_element(acceptable_div, drop_div)
+        drop_text_accept = drop_div.text
+        return drop_text_accept, drop_text_not_accept
+
+    def drop_prevent_propogation(self):
+        self.element_is_clickable(self.locators.PREVENT_TABS).click()
+        drag_div = self.element_is_visible(self.locators.DRAG_ME_PREVENT)
+        not_greedy_inner_box = self.element_is_visible(self.locators.NOT_GREEDY_INNER_BOX)
+        greedy_inner_box = self.element_is_visible(self.locators.GREEDY_INNER_BOX)
+        self.action_drag_and_drop_to_element(drag_div, not_greedy_inner_box)
+        text_not_greedy_box = self.element_is_visible(self.locators.NOT_GREEDY_DROP_BOX_TEXT).text
+        text_not_greedy_inner_box = not_greedy_inner_box.text
+        self.action_drag_and_drop_to_element(drag_div, greedy_inner_box)
+        text_greedy_box = self.element_is_visible(self.locators.GREEDY_DROP_BOX_TEXT).text
+        text_greedy_inner_box = not_greedy_inner_box.text
+        return text_not_greedy_box, text_not_greedy_inner_box, text_greedy_box, text_greedy_inner_box
+
+    def drop_revert_draggable(self, type_drag):
+        drags = {'will':
+                    {'revert': self.locators.WILL_REVERT},
+                 'not_will':
+                     {'revert': self.locators.NOT_REVERT}
+        }
+        self.element_is_visible(self.locators.REVERT_DRAGGABLE_TAB).click()
+        revert = self.element_is_visible(drags[type_drag]['revert'])
+        drop_div = self.element_is_visible(self.locators.DROP_HERE_REVERT)
+        self.action_drag_and_drop_to_element(revert, drop_div)
+        position_after_move = revert.get_attribute('style')
+        time.sleep(1)
+        position_after_revert = revert.get_attribute('style')
+        return position_after_revert, position_after_move
+
+
+
+
+
+
+
