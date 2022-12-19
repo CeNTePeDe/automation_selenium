@@ -1,6 +1,6 @@
 import random
 
-from pages.interection_page import SortablePage, SelectablePage, ResizeblePage, DropablePage
+from pages.interection_page import SortablePage, SelectablePage, ResizeblePage, DropablePage, DraggablePage
 
 
 class TestInteraction:
@@ -61,6 +61,32 @@ class TestInteraction:
             not_will_after_move, not_will_after_revert = droppable_page.drop_revert_draggable('not_will')
             assert will_after_move != will_after_revert, 'the element has not reverted'
             assert not_will_after_move == not_will_after_revert, 'the element has reverted'
+
+    class TestDraggablePage:
+
+        def test_drag_me(self, driver):
+            dragable_page = DraggablePage(driver, 'https://demoqa.com/dragabble')
+            dragable_page.open()
+            drag_before, drag_after = dragable_page.drag_me()
+            assert drag_before != drag_after, "the position of the box has not been changed"
+
+        def test_change_coordinate(self, driver):
+            dragable_page = DraggablePage(driver, 'https://demoqa.com/dragabble')
+            dragable_page.open()
+            top_x, left_x =dragable_page.axis_restricted_x()
+            top_y, left_y =dragable_page.axis_restricted_y()
+            assert top_x[0][0] == top_x[1][0] and int(
+                top_x[1][0]) == 0, 'box position has not changed has been a shift in the y-axis'
+            assert left_x[0][0] != left_x[1][0] and int(
+                left_x[1][0]) != 0, 'box position has not changed has been a shift in the y-axis'
+            assert top_y[0][0] != top_y[1][0] and int(
+                top_y[1][0]) != 0, 'box position has not changed has been a shift in the x-axis'
+            assert left_y[0][0] == left_y[1][0] and int(
+                left_y[1][0]) == 0, 'box position has not changed has been a shift in the x-axis'
+
+
+
+
 
 
 
